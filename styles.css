@@ -52,3 +52,8 @@ button {
   flex-wrap: wrap;
   gap: 5px;
 }
+
+.footer {
+  width: 300px;
+  text-align: center
+}

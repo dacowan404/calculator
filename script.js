@@ -15,11 +15,15 @@ function update(value) {
 
   //operator input
   if (operators.includes(value)) {
-    if (values[1] === '') {
+    if (values[1] === '') { //if no operator, add the operator
       values[1] = value;
-    } else  if (values[2] === '') {
+    } else  if (values[2] === '') { //if no 2nd value for the operation
+      if (value === '-') { //converts to negative
+        values[2] += value
+      } else { // else changes the operator
       values[1] = value;
-    } else {
+      }
+    } else { //evaluates and stores result at value[0], add new operator
       operate();
       values[1] = value;
     } 
