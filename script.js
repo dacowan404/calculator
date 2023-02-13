@@ -17,15 +17,18 @@ function update(value) {
   if (operators.includes(value)) {
     if (values[1] === '') { //if no operator, add the operator
       values[1] = value;
+      updateTop();
     } else  if (values[2] === '') { //if no 2nd value for the operation
       if (value === '-') { //converts to negative
-        values[2] += value
+        values[2] += value;
       } else { // else changes the operator
       values[1] = value;
       }
+      updateTop();
     } else { //evaluates and stores result at value[0], add new operator
       operate();
       values[1] = value;
+      updateTop();
     } 
   } else if (value === '=') { //equal sign input
     if (values[1] !== '' && values[2] !==  '') {
@@ -41,13 +44,18 @@ function update(value) {
         values[2] += value;
       }
     }
+    updateTop();
   } else { //number input
     if (values[1] == '') {
       values[0] += value;
     } else {
       values[2] += value;
     }
+    updateTop();
   }
+}
+
+function updateTop() {
   statement = values.join(' ')
   outputTop.textContent = statement;
 }
@@ -56,6 +64,7 @@ function clear2() {
   values = ['','',''];
   statement = "";
   outputTop.textContent = statement;
+  outputBot.textContent = "";
 }
 
 function delete2() {
@@ -71,6 +80,7 @@ function delete2() {
   }
   statement = values.join(' ')
   outputTop.textContent = statement;
+  outputBot.textContent = "";
   }
 
 function add(x, y) {
@@ -102,6 +112,7 @@ function operate() {
   } else if (operator === "/") {
     if (y === 0) {
       alert("Can't divide by 0");
+      clear2();
       return null;
     } else {
       values[0] = divide(x,y);
@@ -110,6 +121,7 @@ function operate() {
   values[0] = (Math.round(values[0] * 1000)/ 1000).toString();
   values[1] = '';
   values[2] = '';
+  outputBot.textContent = values[0];
 }
 
 
